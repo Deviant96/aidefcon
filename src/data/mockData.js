@@ -1,0 +1,508 @@
+// Mock data for AI Defcon CTF Platform
+
+export const mockChallenges = [
+  // Web
+  {
+    id: 1,
+    title: 'SQL Injection 101',
+    category: 'Web',
+    points: 100,
+    difficulty: 'Easy',
+    solved: true,
+    solveCount: 342,
+    description:
+      "A classic SQL injection vulnerability lurks in this login form. Bypass authentication and retrieve the admin's secret flag. The target application uses a MySQL backend with no input sanitization.",
+    tags: ['sql', 'injection', 'authentication'],
+    hint: 'Think about how user input is concatenated into the query string.',
+    files: ['login_source.zip'],
+  },
+  {
+    id: 2,
+    title: 'XSS Filter Bypass',
+    category: 'Web',
+    points: 250,
+    difficulty: 'Medium',
+    solved: false,
+    solveCount: 187,
+    description:
+      'The application has implemented a basic XSS filter, but can you bypass it? Craft a payload that executes JavaScript and steals the admin cookie.',
+    tags: ['xss', 'filter', 'javascript'],
+    hint: 'Consider alternative event handlers and encoding techniques.',
+    files: ['challenge_source.tar.gz'],
+  },
+  {
+    id: 3,
+    title: 'SSRF to Internal API',
+    category: 'Web',
+    points: 400,
+    difficulty: 'Hard',
+    solved: false,
+    solveCount: 54,
+    description:
+      'Exploit a Server-Side Request Forgery vulnerability to access an internal metadata service and retrieve credentials.',
+    tags: ['ssrf', 'cloud', 'metadata'],
+    hint: null,
+    files: ['webapp.zip'],
+  },
+  // Pwn
+  {
+    id: 4,
+    title: 'Buffer Overflow Basics',
+    category: 'Pwn',
+    points: 150,
+    difficulty: 'Easy',
+    solved: true,
+    solveCount: 278,
+    description:
+      'A classic stack buffer overflow vulnerability. Overwrite the return address to redirect execution to the win() function.',
+    tags: ['buffer-overflow', 'stack', 'rop'],
+    hint: 'Find the exact offset to the return address using a cyclic pattern.',
+    files: ['pwn1', 'pwn1.c'],
+  },
+  {
+    id: 5,
+    title: 'Format String Attack',
+    category: 'Pwn',
+    points: 300,
+    difficulty: 'Medium',
+    solved: false,
+    solveCount: 121,
+    description:
+      'Exploit a format string vulnerability to leak memory addresses and overwrite a global variable.',
+    tags: ['format-string', 'memory-leak', 'arbitrary-write'],
+    hint: null,
+    files: ['fmt', 'fmt.c'],
+  },
+  {
+    id: 6,
+    title: 'Heap Exploitation',
+    category: 'Pwn',
+    points: 500,
+    difficulty: 'Expert',
+    solved: false,
+    solveCount: 18,
+    description:
+      'Advanced heap exploitation challenge. Use tcache poisoning to achieve arbitrary code execution.',
+    tags: ['heap', 'tcache', 'glibc'],
+    hint: null,
+    files: ['heap_chall', 'heap_chall.c', 'libc.so.6'],
+  },
+  // Crypto
+  {
+    id: 7,
+    title: 'Caesar Salad',
+    category: 'Crypto',
+    points: 50,
+    difficulty: 'Easy',
+    solved: true,
+    solveCount: 521,
+    description:
+      'A simple Caesar cipher encryption. Decrypt the message to find the flag. The shift key is hidden somewhere in the challenge.',
+    tags: ['caesar', 'classical', 'cipher'],
+    hint: 'Try all 26 possible shifts.',
+    files: ['cipher.txt'],
+  },
+  {
+    id: 8,
+    title: 'RSA Textbook',
+    category: 'Crypto',
+    points: 200,
+    difficulty: 'Medium',
+    solved: false,
+    solveCount: 203,
+    description:
+      'Textbook RSA with a small public exponent. The message was encrypted without padding, making it vulnerable to small exponent attacks.',
+    tags: ['rsa', 'small-exponent', 'number-theory'],
+    hint: 'Consider cube root attacks for e=3.',
+    files: ['output.txt'],
+  },
+  {
+    id: 9,
+    title: 'AES-CBC Padding Oracle',
+    category: 'Crypto',
+    points: 450,
+    difficulty: 'Hard',
+    solved: false,
+    solveCount: 37,
+    description:
+      'Exploit a padding oracle vulnerability in an AES-CBC encrypted service to decrypt secret messages byte by byte.',
+    tags: ['aes', 'cbc', 'padding-oracle'],
+    hint: null,
+    files: ['oracle.py'],
+  },
+  // Reverse
+  {
+    id: 10,
+    title: 'Baby Reverse',
+    category: 'Reverse',
+    points: 100,
+    difficulty: 'Easy',
+    solved: false,
+    solveCount: 389,
+    description:
+      'A simple crackme binary. Reverse engineer the password check routine to find the correct input.',
+    tags: ['crackme', 'x86', 'static-analysis'],
+    hint: 'Use strings or ltrace to get a quick look.',
+    files: ['crackme'],
+  },
+  {
+    id: 11,
+    title: 'Obfuscated JavaScript',
+    category: 'Reverse',
+    points: 250,
+    difficulty: 'Medium',
+    solved: false,
+    solveCount: 145,
+    description:
+      'Deobfuscate a heavily obfuscated JavaScript file to find the hidden flag validation logic.',
+    tags: ['javascript', 'obfuscation', 'deobfuscation'],
+    hint: 'Try beautifying and tracing execution flow.',
+    files: ['challenge.js'],
+  },
+  {
+    id: 12,
+    title: 'Anti-Debug Maze',
+    category: 'Reverse',
+    points: 400,
+    difficulty: 'Hard',
+    solved: false,
+    solveCount: 41,
+    description:
+      'A binary with multiple anti-debugging tricks. Bypass all protections and extract the flag.',
+    tags: ['anti-debug', 'ptrace', 'timing'],
+    hint: null,
+    files: ['maze_binary'],
+  },
+  // Misc
+  {
+    id: 13,
+    title: 'Stego Hidden Flag',
+    category: 'Misc',
+    points: 100,
+    difficulty: 'Easy',
+    solved: true,
+    solveCount: 298,
+    description:
+      'A flag is hidden inside an image using steganography. Find and extract it.',
+    tags: ['steganography', 'image', 'lsb'],
+    hint: 'Try examining the least significant bits.',
+    files: ['image.png'],
+  },
+  {
+    id: 14,
+    title: 'Network Packet Analysis',
+    category: 'Misc',
+    points: 200,
+    difficulty: 'Medium',
+    solved: false,
+    solveCount: 176,
+    description:
+      'Analyze a PCAP file to reconstruct a secret communication and extract the flag.',
+    tags: ['pcap', 'wireshark', 'network'],
+    hint: 'Follow the TCP streams.',
+    files: ['capture.pcap'],
+  },
+  {
+    id: 15,
+    title: 'AI Prompt Injection',
+    category: 'Misc',
+    points: 350,
+    difficulty: 'Hard',
+    solved: false,
+    solveCount: 89,
+    description:
+      'Exploit a vulnerable AI chatbot using prompt injection techniques to make it reveal a hidden system prompt containing the flag.',
+    tags: ['ai', 'prompt-injection', 'llm'],
+    hint: null,
+    files: [],
+  },
+]
+
+export const mockTeams = [
+  {
+    id: 1,
+    name: '0xDEADBEEF',
+    rank: 1,
+    points: 4250,
+    solved: 12,
+    lastSubmission: '2 min ago',
+    status: 'active',
+    members: ['h4x0r_elite', 'pwn_master', 'crypto_wiz', 'rev_king'],
+    country: 'US',
+    solveHistory: [
+      { challenge: 'Heap Exploitation', points: 500, time: '2 min ago' },
+      { challenge: 'AES-CBC Padding Oracle', points: 450, time: '45 min ago' },
+      { challenge: 'Anti-Debug Maze', points: 400, time: '2h ago' },
+    ],
+  },
+  {
+    id: 2,
+    name: 'NullPointerException',
+    rank: 2,
+    points: 3900,
+    solved: 11,
+    lastSubmission: '8 min ago',
+    status: 'active',
+    members: ['null_p', 'segfault', 'stack_smasher'],
+    country: 'DE',
+    solveHistory: [
+      { challenge: 'SSRF to Internal API', points: 400, time: '8 min ago' },
+      { challenge: 'Format String Attack', points: 300, time: '1h ago' },
+    ],
+  },
+  {
+    id: 3,
+    name: 'CipherPunks',
+    rank: 3,
+    points: 3650,
+    solved: 10,
+    lastSubmission: '15 min ago',
+    status: 'active',
+    members: ['cipher_queen', 'modular_arith', 'rsa_breaker', 'ecc_fan'],
+    country: 'JP',
+    solveHistory: [
+      { challenge: 'RSA Textbook', points: 200, time: '15 min ago' },
+      { challenge: 'XSS Filter Bypass', points: 250, time: '3h ago' },
+    ],
+  },
+  {
+    id: 4,
+    name: 'RootAccess',
+    rank: 4,
+    points: 3200,
+    solved: 9,
+    lastSubmission: '32 min ago',
+    status: 'active',
+    members: ['root_user', 'sudo_god', 'chmod_777'],
+    country: 'KR',
+    solveHistory: [
+      { challenge: 'Buffer Overflow Basics', points: 150, time: '32 min ago' },
+    ],
+  },
+  {
+    id: 5,
+    name: 'BinaryNinjas',
+    rank: 5,
+    points: 2950,
+    solved: 9,
+    lastSubmission: '1h ago',
+    status: 'active',
+    members: ['ninja_x86', 'asm_guru', 'ghidra_pro'],
+    country: 'CN',
+    solveHistory: [],
+  },
+  {
+    id: 6,
+    name: 'WebShellz',
+    rank: 6,
+    points: 2800,
+    solved: 8,
+    lastSubmission: '1h 20m ago',
+    status: 'active',
+    members: ['php_shell', 'asp_hacker', 'rce_master'],
+    country: 'RU',
+    solveHistory: [],
+  },
+  {
+    id: 7,
+    name: 'FlagHunters',
+    rank: 7,
+    points: 2600,
+    solved: 8,
+    lastSubmission: '2h ago',
+    status: 'idle',
+    members: ['flag_collector', 'ctf_enjoyer'],
+    country: 'BR',
+    solveHistory: [],
+  },
+  {
+    id: 8,
+    name: 'AlgorithmX',
+    rank: 8,
+    points: 2350,
+    solved: 7,
+    lastSubmission: '2h 30m ago',
+    status: 'idle',
+    members: ['algo_king', 'complexity_fan', 'dp_master', 'graph_guru'],
+    country: 'IN',
+    solveHistory: [],
+  },
+  {
+    id: 9,
+    name: 'H4CK3RS',
+    rank: 9,
+    points: 2100,
+    solved: 6,
+    lastSubmission: '3h ago',
+    status: 'idle',
+    members: ['l33t_h4x0r', 'skr1pt_k1ddy'],
+    country: 'GB',
+    solveHistory: [],
+  },
+  {
+    id: 10,
+    name: 'CryptoKitties',
+    rank: 10,
+    points: 1900,
+    solved: 6,
+    lastSubmission: '4h ago',
+    status: 'idle',
+    members: ['crypto_cat', 'elliptic_cat', 'hash_kitty'],
+    country: 'CA',
+    solveHistory: [],
+  },
+  {
+    id: 11,
+    name: 'RevEngineers',
+    rank: 11,
+    points: 1750,
+    solved: 5,
+    lastSubmission: '5h ago',
+    status: 'idle',
+    members: ['ida_pro_user', 'ghidra_fan'],
+    country: 'FR',
+    solveHistory: [],
+  },
+  {
+    id: 12,
+    name: 'PWNalysts',
+    rank: 12,
+    points: 1600,
+    solved: 5,
+    lastSubmission: '6h ago',
+    status: 'idle',
+    members: ['heap_wizard', 'rop_chainer', 'libc_leaker'],
+    country: 'NL',
+    solveHistory: [],
+  },
+  {
+    id: 13,
+    name: 'Newbies_CTF',
+    rank: 13,
+    points: 1200,
+    solved: 4,
+    lastSubmission: '8h ago',
+    status: 'idle',
+    members: ['beginner_1', 'newbie_hacker'],
+    country: 'AU',
+    solveHistory: [],
+  },
+  {
+    id: 14,
+    name: 'SolveAll',
+    rank: 14,
+    points: 950,
+    solved: 3,
+    lastSubmission: '10h ago',
+    status: 'idle',
+    members: ['solve_master'],
+    country: 'MX',
+    solveHistory: [],
+  },
+  {
+    id: 15,
+    name: 'LearningCurve',
+    rank: 15,
+    points: 650,
+    solved: 2,
+    lastSubmission: '12h ago',
+    status: 'idle',
+    members: ['learning_hacker', 'ctf_student', 'flag_seeker'],
+    country: 'SE',
+    solveHistory: [],
+  },
+]
+
+export const mockAnnouncements = [
+  {
+    id: 1,
+    title: 'Competition has started!',
+    content:
+      'AI Defcon CTF 2025 is now live! All challenges are unlocked. Good luck to all participants. Remember: fair play only!',
+    time: '2h ago',
+    pinned: true,
+    urgent: false,
+  },
+  {
+    id: 2,
+    title: 'Hint released for Heap Exploitation',
+    content:
+      'A small hint has been released for the Heap Exploitation challenge due to low solve rate. Check the challenge detail panel.',
+    time: '45 min ago',
+    pinned: false,
+    urgent: false,
+  },
+  {
+    id: 3,
+    title: 'Server Maintenance Notice',
+    content:
+      'We will perform a 5-minute maintenance window at 18:00 UTC. Submissions will be paused during this period.',
+    time: '20 min ago',
+    pinned: false,
+    urgent: true,
+  },
+]
+
+export const mockFaqs = [
+  {
+    question: 'How does the competition work?',
+    answer:
+      'AI Defcon is a Jeopardy-style CTF. Solve challenges across multiple categories to earn points. The team with the most points at the end wins.',
+  },
+  {
+    question: 'What are the prizes?',
+    answer:
+      '1st place: $5,000 + trophy\n2nd place: $2,500\n3rd place: $1,000\nTop 10: Special AI Defcon swag pack',
+  },
+  {
+    question: 'How do I register?',
+    answer:
+      'Click "Register Team" on the homepage. You can sign up using Gmail, GitHub, or email/OTP. Create or join a team after registering.',
+  },
+  {
+    question: 'How do I join an existing team?',
+    answer:
+      "Ask your team captain for the Team Access Token (format: AIDF-XXXX-XXXX). Click 'Join Team' and enter the token.",
+  },
+  {
+    question: 'How do I submit a flag?',
+    answer:
+      'Navigate to the challenge, enter your flag in the submission form at the bottom of the challenge detail panel. Flags follow the format: AIDF{...}',
+  },
+  {
+    question: 'What is the flag format?',
+    answer:
+      'All flags follow the format: AIDF{some_flag_content_here}. Unless stated otherwise in the challenge description.',
+  },
+  {
+    question: 'Can I solve challenges alone?',
+    answer:
+      'You must be part of a team to submit flags, but you can browse challenges as a guest. Solo participation requires creating a single-member team.',
+  },
+  {
+    question: 'Is the competition open to everyone?',
+    answer:
+      'Yes! AI Defcon is open to participants worldwide. You must be 18+ years old to participate. See the Rules page for full eligibility criteria.',
+  },
+]
+
+export const COMPETITION_END_DATE = new Date(
+  Date.now() + 47 * 60 * 60 * 1000 + 23 * 60 * 1000 + 41 * 1000,
+)
+
+export const CATEGORIES = ['Web', 'Pwn', 'Crypto', 'Reverse', 'Misc']
+
+export const DIFFICULTY_COLORS = {
+  Easy: 'text-green-600 bg-green-50',
+  Medium: 'text-yellow-600 bg-yellow-50',
+  Hard: 'text-orange-600 bg-orange-50',
+  Expert: 'text-red-600 bg-red-50',
+}
+
+export const CATEGORY_ICONS = {
+  Web: '🌐',
+  Pwn: '💥',
+  Crypto: '🔐',
+  Reverse: '🔄',
+  Misc: '🎯',
+}
