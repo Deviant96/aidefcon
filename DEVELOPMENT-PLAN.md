@@ -120,7 +120,7 @@ The specification is defined in [`AI-DEFCON-CTF-SPEC.md`](./AI-DEFCON-CTF-SPEC.m
 ## Phase 2 — Backend Integration (Planned)
 
 ### WordPress Backend
-- [ ] Set up WordPress with custom plugin: `aidefcon-core`
+- [x] Set up WordPress with custom plugin: `aidefcon-core`
 - [ ] Custom REST API endpoints:
   - [ ] `POST /wp-json/aidefcon/v1/auth/otp-request`
   - [ ] `POST /wp-json/aidefcon/v1/auth/otp-verify`
@@ -176,6 +176,8 @@ aidefcon/
 ├── vite.config.js
 ├── tailwind.config.js
 ├── postcss.config.js
+├── wordpress/
+│   └── wp-content/plugins/aidefcon-core/aidefcon-core.php  # WordPress backend plugin scaffold
 ├── public/
 │   └── favicon.svg
 └── src/
