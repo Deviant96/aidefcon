@@ -22,6 +22,15 @@ final class Aidefcon_Core_Plugin
 {
     private static $instance = null;
 
+    private function __clone()
+    {
+    }
+
+    public function __wakeup(): void
+    {
+        throw new RuntimeException('Cannot unserialize singleton.');
+    }
+
     public static function instance(): self
     {
         if (null === self::$instance) {
