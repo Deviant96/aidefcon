@@ -24,11 +24,12 @@ final class Aidefcon_Core_Plugin
 
     private function __clone()
     {
+        throw new RuntimeException('Cannot clone singleton instance.');
     }
 
     public function __wakeup(): void
     {
-        throw new RuntimeException('Cannot unserialize singleton.');
+        throw new RuntimeException('Cannot deserialize singleton instance.');
     }
 
     public static function instance(): self
