@@ -22,7 +22,7 @@ final class Aidefcon_Core_Plugin
 {
     private static $instance = null;
 
-    private function __clone()
+    private function __clone(): void
     {
         throw new RuntimeException('Cannot clone singleton instance.');
     }
