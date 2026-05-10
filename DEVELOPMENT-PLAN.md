@@ -121,17 +121,17 @@ The specification is defined in [`AI-DEFCON-CTF-SPEC.md`](./AI-DEFCON-CTF-SPEC.m
 
 ### WordPress Backend
 - [x] Set up WordPress with custom plugin: `aidefcon-core`
-- [ ] Custom REST API endpoints:
-  - [ ] `POST /wp-json/aidefcon/v1/auth/otp-request`
-  - [ ] `POST /wp-json/aidefcon/v1/auth/otp-verify`
-  - [ ] `GET /wp-json/aidefcon/v1/challenges`
-  - [ ] `POST /wp-json/aidefcon/v1/challenges/{id}/submit`
-  - [ ] `GET /wp-json/aidefcon/v1/scoreboard`
-  - [ ] `POST /wp-json/aidefcon/v1/teams`
-  - [ ] `POST /wp-json/aidefcon/v1/teams/join`
-  - [ ] `GET /wp-json/aidefcon/v1/profile`
-- [ ] Custom DB tables: `aidf_teams`, `aidf_members`, `aidf_submissions`
-- [ ] WordPress custom post types: `aidf_challenge`, `aidf_announcement`
+- [x] Custom REST API endpoints (mock handlers + permissions):
+  - [x] `POST /wp-json/aidefcon/v1/auth/otp-request`
+  - [x] `POST /wp-json/aidefcon/v1/auth/otp-verify`
+  - [x] `GET /wp-json/aidefcon/v1/challenges`
+  - [x] `POST /wp-json/aidefcon/v1/challenges/{id}/submit`
+  - [x] `GET /wp-json/aidefcon/v1/scoreboard`
+  - [x] `POST /wp-json/aidefcon/v1/teams`
+  - [x] `POST /wp-json/aidefcon/v1/teams/join`
+  - [x] `GET /wp-json/aidefcon/v1/profile`
+- [x] Custom DB tables: `aidf_teams`, `aidf_members`, `aidf_submissions`
+- [x] WordPress custom post types: `aidf_challenge`, `aidf_announcement`
 
 ### Real Authentication
 - [ ] WordPress OAuth: Google login integration
