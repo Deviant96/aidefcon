@@ -20,6 +20,9 @@ export default function App() {
   const [showJoinTeam, setShowJoinTeam] = useState(false)
   const [showFaq, setShowFaq] = useState(false)
 
+  // Get the base path from WordPress theme
+  const basePath = window.AIDEFCON_BASE_PATH || '/'
+
   function handleLogin(userData) {
     setUser(userData)
     setShowAuth(false)
@@ -59,7 +62,7 @@ export default function App() {
   const isGuest = !user
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basePath}>
       <div className="min-h-screen bg-white">
         <Navbar
           onAuthClick={() => setShowAuth(true)}
