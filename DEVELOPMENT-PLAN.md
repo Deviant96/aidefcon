@@ -140,11 +140,11 @@ The specification is defined in [`AI-DEFCON-CTF-SPEC.md`](./AI-DEFCON-CTF-SPEC.m
 - [ ] JWT session management
 
 ### Admin Dashboard
-- [ ] Competition settings (enable/disable submissions, scoreboard freeze, countdown date)
-- [ ] Challenge CRUD with file upload
-- [ ] Announcement management (pin, urgent, schedule)
-- [ ] Team management (ban, remove members, regenerate tokens)
-- [ ] Submission logs and audit history
+- [x] Competition settings (enable/disable submissions, scoreboard freeze, countdown date)
+- [x] Challenge CRUD with file upload
+- [x] Announcement management (pin, urgent, schedule)
+- [x] Team management (ban, remove members, regenerate tokens)
+- [x] Submission logs and audit history
 
 ---
 
