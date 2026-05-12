@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Trophy, Users, Flag, Zap, Bell } from 'lucide-react'
+import { ArrowRight, Trophy, Users, Flag, Zap } from 'lucide-react'
 import Countdown from '../components/Countdown'
-import { mockAnnouncements } from '../data/mockData'
 
 const prizes = [
   { place: '1st', amount: '$5,000', icon: '🥇', color: 'border-yellow-300 bg-yellow-50' },
@@ -104,40 +103,6 @@ export default function HomePage({ onAuthClick, onCreateTeam, onJoinTeam, isGues
           <p className="text-center text-sm text-gray-400 mt-6">
             + Special swag packs for teams ranking in top 10
           </p>
-        </div>
-      </section>
-
-      {/* Announcements */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-3xl mx-auto">
-          <div className="flex items-center gap-2 mb-8">
-            <Bell className="w-5 h-5 text-gray-700" />
-            <h2 className="section-title">Announcements</h2>
-          </div>
-          <div className="space-y-4">
-            {mockAnnouncements.map((ann) => (
-              <div
-                key={ann.id}
-                className={`card p-5 ${ann.urgent ? 'border-red-200 bg-red-50/50' : ''}`}
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      {ann.pinned && (
-                        <span className="badge bg-gray-900 text-white text-xs">📌 Pinned</span>
-                      )}
-                      {ann.urgent && (
-                        <span className="badge bg-red-100 text-red-700">🚨 Urgent</span>
-                      )}
-                    </div>
-                    <h3 className="font-semibold text-gray-900">{ann.title}</h3>
-                    <p className="text-sm text-gray-600 mt-1">{ann.content}</p>
-                  </div>
-                  <span className="text-xs text-gray-400 whitespace-nowrap">{ann.time}</span>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
