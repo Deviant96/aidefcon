@@ -8,13 +8,6 @@ const prizes = [
   { place: '3rd', amount: '$1,000', icon: '🥉', color: 'border-orange-300 bg-orange-50' },
 ]
 
-const stats = [
-  { label: 'Teams Registered', value: '234', icon: Users },
-  { label: 'Challenges', value: '15', icon: Flag },
-  { label: 'Prize Pool', value: '$8,500', icon: Trophy },
-  { label: 'Hours Remaining', value: '47', icon: Zap },
-]
-
 export default function HomePage({ onAuthClick, onCreateTeam, onJoinTeam, isGuest }) {
   return (
     <main className="min-h-screen">
@@ -65,20 +58,6 @@ export default function HomePage({ onAuthClick, onCreateTeam, onJoinTeam, isGues
               Time remaining
             </p>
             <Countdown />
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="py-12 border-y border-gray-100 bg-gray-50/50">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map(({ label, value, icon: Icon }) => (
-              <div key={label} className="text-center">
-                <div className="text-3xl font-bold text-gray-900 font-mono">{value}</div>
-                <div className="text-sm text-gray-500 mt-1">{label}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
