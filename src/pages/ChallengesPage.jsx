@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Flag,
   Download,
@@ -190,101 +191,123 @@ export default function ChallengesPage({ isGuest, onAuthClick }) {
   const totalSolved = mockChallenges.filter((c) => c.solved).length
 
   return (
-    <main className="min-h-screen bg-white relative overflow-hidden pt-16 flex flex-col">
+    <main className="h-[calc(100vh-5rem)] bg-white relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 -left-40 w-[30rem] h-[30rem] rounded-full bg-gray-100/70 blur-3xl" />
-        <div className="absolute top-24 right-12 w-72 h-72 rounded-full bg-slate-100/80 blur-3xl" />
-        <div className="absolute inset-0 opacity-[0.35] [background-image:linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] [background-size:48px_48px]" />
+        <div className="absolute -top-40 -left-40 w-[40rem] h-[40rem] rounded-full bg-blue-50/60 blur-3xl" />
+        <div className="absolute top-24 right-12 w-96 h-96 rounded-full bg-slate-100/80 blur-3xl" />
+        <div className="absolute bottom-0 left-1/2 w-[30rem] h-[20rem] rounded-full bg-gray-100/50 blur-3xl" />
+        <div className="absolute inset-0 opacity-[0.3] [background-image:linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] [background-size:48px_48px]" />
       </div>
-      <div className="relative z-10 flex-1 flex overflow-hidden">
-        {/* Left: Categories */}
-        <aside className="w-48 border-r border-gray-200 bg-gray-50/50 flex-shrink-0 overflow-y-auto p-3">
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide px-3 mb-2 mt-2">
-            Categories
-          </p>
-          <nav className="space-y-0.5">
-            {categories.map((cat) => {
-              const count =
-                cat === 'All'
-                  ? mockChallenges.length
-                  : mockChallenges.filter((c) => c.category === cat).length
-              const solved =
-                cat === 'All'
-                  ? totalSolved
-                  : mockChallenges.filter((c) => c.category === cat && c.solved).length
 
-              return (
-                <button
-                  key={cat}
-                  onClick={() => {
-                    setActiveCategory(cat)
-                    setSelectedChallenge(null)
-                  }}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors flex items-center justify-between ${
-                    activeCategory === cat
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  <span>
-                    {cat !== 'All' && `${CATEGORY_ICONS[cat]} `}
-                    {cat}
-                  </span>
-                  <span
-                    className={`text-xs font-mono ${
-                      activeCategory === cat ? 'text-gray-300' : 'text-gray-400'
-                    }`}
-                  >
-                    {solved}/{count}
-                  </span>
-                </button>
-              )
-            })}
-          </nav>
-        </aside>
-
-        {/* Middle: Challenge list */}
-        <div className="flex-1 overflow-y-auto border-r border-gray-200 min-w-0">
-          <div className="px-4 py-4 border-b border-gray-200 bg-white sticky top-0 z-10">
-            <h1 className="font-bold text-gray-900">
-              {activeCategory === 'All' ? 'All Challenges' : `${CATEGORY_ICONS[activeCategory]} ${activeCategory}`}
-            </h1>
-            <p className="text-xs text-gray-400 mt-0.5">{filtered.length} challenges</p>
-          </div>
-          <div className="divide-y divide-gray-100">
-            {filtered.map((challenge) => (
-              <button
-                key={challenge.id}
-                onClick={() => setSelectedChallenge(challenge)}
-                className={`w-full text-left px-4 py-4 hover:bg-gray-50 transition-colors flex items-center gap-3 ${
-                  selectedChallenge?.id === challenge.id ? 'bg-blue-50' : ''
-                }`}
-              >
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className={`badge text-xs ${DIFFICULTY_COLORS[challenge.difficulty]}`}>
-                      {challenge.difficulty}
-                    </span>
-                    {challenge.solved && (
-                      <CheckCircle2 className="w-3.5 h-3.5 text-green-500 flex-shrink-0" />
-                    )}
-                  </div>
-                  <p className="font-semibold text-gray-900 text-sm truncate">{challenge.title}</p>
-                  <p className="text-xs text-gray-400 mt-0.5 font-mono">{challenge.points} pts · {challenge.solveCount} solves</p>
-                </div>
-                <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
-              </button>
-            ))}
+      {/* 3-column layout: left wing | content | right wing */}
+      <div className="relative z-10 h-full mt-16 grid grid-cols-[5rem_1fr_5rem] xl:grid-cols-[7rem_1fr_7rem] items-stretch">
+        {/* Left wing: Challenges title */}
+        <div className="flex items-center justify-center border-r border-gray-100">
+          <div className="flex flex-col items-center gap-3" style={{writingMode: 'vertical-rl', transform: 'rotate(180deg)'}}>
+            <h1 className="text-4xl xl:text-5xl font-extrabold tracking-tight text-gray-900 font-display leading-none whitespace-nowrap">Challenges</h1>
+            <span className="text-xs font-mono text-gray-400 uppercase tracking-[0.2em] whitespace-nowrap">{mockChallenges.length} total</span>
           </div>
         </div>
 
-        {/* Right: Challenge detail */}
-        <div className="hidden lg:flex w-96 xl:w-[480px] flex-col flex-shrink-0 overflow-hidden">
-          <ChallengeDetail
-            challenge={selectedChallenge}
-            isGuest={isGuest}
-            onAuthClick={onAuthClick}
-          />
+        {/* Center content */}
+        <div className="h-full overflow-hidden flex flex-col">
+          {/* Header with category filters */}
+          <div className="flex-shrink-0 border-b border-gray-200 bg-white p-6">
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 font-display mb-4">
+              {activeCategory === 'All' ? 'All Challenges' : `${CATEGORY_ICONS[activeCategory]} ${activeCategory}`}
+            </h2>
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              {categories.map((cat) => {
+                const count =
+                  cat === 'All'
+                    ? mockChallenges.length
+                    : mockChallenges.filter((c) => c.category === cat).length
+                const solved =
+                  cat === 'All'
+                    ? totalSolved
+                    : mockChallenges.filter((c) => c.category === cat && c.solved).length
+
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => {
+                      setActiveCategory(cat)
+                      setSelectedChallenge(null)
+                    }}
+                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors flex-shrink-0 ${
+                      activeCategory === cat
+                        ? 'bg-gray-900 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {cat !== 'All' && `${CATEGORY_ICONS[cat]} `}
+                    {cat} <span className="ml-2 text-xs">{solved}/{count}</span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Challenge list grid + detail panel */}
+          <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_26rem] gap-0">
+            {/* Challenge list grid */}
+            <div className="overflow-y-auto grid grid-cols-1 lg:grid-cols-2 gap-4 p-6">
+              {filtered.map((challenge) => (
+                <button
+                  key={challenge.id}
+                  onClick={() => setSelectedChallenge(challenge)}
+                  className={`text-left p-5 rounded-xl border border-gray-200 transition-all hover:shadow-lg hover:border-gray-300 ${
+                    selectedChallenge?.id === challenge.id ? 'ring-2 ring-blue-500 shadow-lg' : 'bg-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-3 mb-3 flex-wrap">
+                    <span className={`badge text-sm ${DIFFICULTY_COLORS[challenge.difficulty]}`}>
+                      {challenge.difficulty}
+                    </span>
+                    <span className="badge bg-blue-50 text-blue-700 text-sm font-mono">
+                      {challenge.points} pts
+                    </span>
+                    {challenge.solved && (
+                      <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                    )}
+                  </div>
+                  <p className="font-bold text-gray-900 text-lg mb-1">{challenge.title}</p>
+                  <p className="text-sm text-gray-500 font-mono">{challenge.solveCount} solves</p>
+                </button>
+              ))}
+            </div>
+
+            {/* Right detail panel */}
+            <aside className="hidden lg:flex flex-col border-l border-gray-100 overflow-hidden">
+              <div className="overflow-y-auto flex-1">
+                <ChallengeDetail
+                  challenge={selectedChallenge}
+                  isGuest={isGuest}
+                  onAuthClick={onAuthClick}
+                />
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        {/* Right wing: Scoreboard & My Teams */}
+        <div className="flex items-center justify-center border-l border-gray-100">
+          <div className="flex flex-row items-center gap-16" style={{writingMode: 'vertical-rl'}}>
+            <Link
+              to="/scoreboard"
+              className="flex flex-col items-center gap-1 group text-gray-300 hover:text-gray-900 transition-colors"
+            >
+              <span className="text-4xl xl:text-5xl font-extrabold tracking-tight font-display leading-none whitespace-nowrap group-hover:text-gray-900">Scoreboard</span>
+            </Link>
+            <div className="w-8 h-px bg-gray-200" />
+            <button
+              className="flex flex-col items-center gap-1 group text-gray-300 hover:text-gray-900 transition-colors"
+              disabled
+              title="Coming soon"
+            >
+              <span className="text-4xl xl:text-5xl font-extrabold tracking-tight font-display leading-none whitespace-nowrap group-hover:text-gray-900">My Teams</span>
+            </button>
+          </div>
         </div>
       </div>
 
