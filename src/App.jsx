@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import AuthModal from './components/AuthModal'
 import { CreateTeamModal, JoinTeamModal } from './components/TeamModals'
@@ -63,14 +64,16 @@ export default function App() {
 
   return (
     <BrowserRouter basename={basePath}>
-      <div className="min-h-screen bg-white">
-        <Navbar
-          onAuthClick={() => setShowAuth(true)}
-          onFaqClick={() => setShowFaq(true)}
-          isGuest={isGuest}
-          username={user?.username}
-        />
-
+      <AppShell
+        isGuest={isGuest}
+        user={user}
+        onAuthClick={() => setShowAuth(true)}
+        onFaqClick={() => setShowFaq(true)}
+        onCreateTeam={openAuthOrCreateTeam}
+        onJoinTeam={openAuthOrJoinTeam}
+        onLogout={handleLogout}
+        team={team}
+      >
         <Routes>
           <Route
             path="/"
@@ -78,8 +81,10 @@ export default function App() {
               <HomePage
                 isGuest={isGuest}
                 onAuthClick={() => setShowAuth(true)}
+                onFaqClick={() => setShowFaq(true)}
                 onCreateTeam={openAuthOrCreateTeam}
                 onJoinTeam={openAuthOrJoinTeam}
+                username={user?.username}
               />
             }
           />
@@ -133,7 +138,25 @@ export default function App() {
           />
         )}
         {showFaq && <FaqSidebar onClose={() => setShowFaq(false)} />}
-      </div>
+      </AppShell>
     </BrowserRouter>
+  )
+}
+
+function AppShell({ children, isGuest, user, onAuthClick, onFaqClick }) {
+  const location = useLocation()
+
+  return (
+    <div className="min-h-screen bg-white">
+      {location.pathname !== '/' && (
+        <Navbar
+          onAuthClick={onAuthClick}
+          onFaqClick={onFaqClick}
+          isGuest={isGuest}
+          username={user?.username}
+        />
+      )}
+      {children}
+    </div>
   )
 }

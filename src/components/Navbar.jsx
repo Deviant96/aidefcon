@@ -1,19 +1,12 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Menu, X, Shield, User, Bell, Megaphone, Sparkles } from 'lucide-react'
 import { mockAnnouncements } from '../data/mockData'
 
-const navItems = [
-  { label: 'Rules', path: '/rules' },
-  { label: 'FAQ', path: '/faq' },
-  { label: 'Beginner Quest', path: '/beginner' },
-]
-
 export default function Navbar({ onAuthClick, onFaqClick, isGuest, username }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [announcementsOpen, setAnnouncementsOpen] = useState(false)
-  const location = useLocation()
 
   const announcementsModal = announcementsOpen ? (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -77,31 +70,6 @@ export default function Navbar({ onAuthClick, onFaqClick, isGuest, username }) {
             <span className="text-lg">AI DEFCON</span>
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1">
-            {navItems.map((item) =>
-              item.path === '/faq' ? (
-                <button
-                  key={item.label}
-                  onClick={onFaqClick}
-                  className="btn-ghost text-sm"
-                >
-                  {item.label}
-                </button>
-              ) : (
-                <Link
-                  key={item.label}
-                  to={item.path}
-                  className={`btn-ghost text-sm ${
-                    location.pathname === item.path ? 'bg-gray-100 text-gray-900' : ''
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ),
-            )}
-          </nav>
-
           <button
             onClick={() => setAnnouncementsOpen(true)}
             className="hidden md:flex items-center gap-3 px-5 py-2.5 rounded-xl border border-gray-200 bg-gradient-to-r from-amber-50 via-orange-50 to-rose-50 shadow-sm hover:shadow-md hover:border-orange-200 transition-all"
@@ -148,26 +116,6 @@ export default function Navbar({ onAuthClick, onFaqClick, isGuest, username }) {
       {/* Mobile nav */}
       {mobileOpen && (
         <div className="md:hidden border-t border-gray-200 bg-white px-4 py-3 space-y-1">
-          {navItems.map((item) =>
-            item.path === '/faq' ? (
-              <button
-                key={item.label}
-                onClick={() => { onFaqClick(); setMobileOpen(false) }}
-                className="w-full text-left btn-ghost text-sm"
-              >
-                {item.label}
-              </button>
-            ) : (
-              <Link
-                key={item.label}
-                to={item.path}
-                onClick={() => setMobileOpen(false)}
-                className="block btn-ghost text-sm"
-              >
-                {item.label}
-              </Link>
-            ),
-          )}
           <button
             onClick={() => {
               setAnnouncementsOpen(true)
