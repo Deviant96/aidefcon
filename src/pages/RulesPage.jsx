@@ -60,8 +60,13 @@ AI Defcon reserves the right to withhold prizes in cases of suspected rule viola
 
 export default function RulesPage() {
   return (
-    <main className="min-h-screen pt-24 pb-16 px-4">
-      <div className="max-w-3xl mx-auto">
+    <main className="min-h-screen bg-white relative overflow-hidden pt-24 pb-16 px-4">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 -left-40 w-[30rem] h-[30rem] rounded-full bg-gray-100/70 blur-3xl" />
+        <div className="absolute top-24 right-12 w-72 h-72 rounded-full bg-slate-100/80 blur-3xl" />
+        <div className="absolute inset-0 opacity-[0.35] [background-image:linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] [background-size:48px_48px]" />
+      </div>
+      <div className="relative z-10">
         {/* Header */}
         <div className="flex items-center gap-3 mb-2">
           <Shield className="w-8 h-8 text-gray-900" />

@@ -190,8 +190,13 @@ export default function ChallengesPage({ isGuest, onAuthClick }) {
   const totalSolved = mockChallenges.filter((c) => c.solved).length
 
   return (
-    <main className="pt-16 h-screen flex flex-col">
-      <div className="flex-1 flex overflow-hidden">
+    <main className="min-h-screen bg-white relative overflow-hidden pt-16 flex flex-col">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 -left-40 w-[30rem] h-[30rem] rounded-full bg-gray-100/70 blur-3xl" />
+        <div className="absolute top-24 right-12 w-72 h-72 rounded-full bg-slate-100/80 blur-3xl" />
+        <div className="absolute inset-0 opacity-[0.35] [background-image:linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] [background-size:48px_48px]" />
+      </div>
+      <div className="relative z-10 flex-1 flex overflow-hidden">
         {/* Left: Categories */}
         <aside className="w-48 border-r border-gray-200 bg-gray-50/50 flex-shrink-0 overflow-y-auto p-3">
           <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide px-3 mb-2 mt-2">
