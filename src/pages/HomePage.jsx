@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Trophy, Users, Flag, Zap, User } from 'lucide-react'
+import { ArrowRight, User } from 'lucide-react'
 import Countdown from '../components/Countdown'
 
 const prizes = [
@@ -133,16 +133,7 @@ export default function HomePage({ onAuthClick, onFaqClick, onCreateTeam, onJoin
         </div>
       </section>
 
-      {/* CTA footer */}
-      <section className="py-20 px-4 text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Ready to compete?</h2>
-        <p className="text-gray-500 mb-8">
-          Challenges across Web, Pwn, Crypto, Reverse Engineering and Misc.
-        </p>
-        <Link to="/challenges" className="btn-primary">
-          View Challenges <ArrowRight className="w-4 h-4" />
-        </Link>
-      </section>
+
     </main>
   )
 }

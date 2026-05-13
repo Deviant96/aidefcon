@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { X, Search, TrendingUp, Clock, Users } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { X, Search, TrendingUp, Clock, Users, Flag, ArrowRight } from 'lucide-react'
 import { mockTeams } from '../data/mockData'
 
 const countryFlag = (code) => {
@@ -117,6 +118,23 @@ export default function ScoreboardPage() {
             />
           </div>
         </div>
+
+        {/* View Challenges CTA */}
+        <Link
+          to="/challenges"
+          className="group flex items-center justify-between gap-6 w-full mb-8 px-8 py-6 rounded-2xl bg-gray-900 text-white shadow-xl hover:bg-gray-800 transition-all hover:shadow-2xl hover:-translate-y-0.5"
+        >
+          <div className="flex items-center gap-5">
+            <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+              <Flag className="w-6 h-6" />
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.2em] text-gray-400 font-semibold mb-0.5">Ready to play?</p>
+              <p className="text-2xl font-extrabold tracking-tight">View Challenges</p>
+            </div>
+          </div>
+          <ArrowRight className="w-7 h-7 text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all flex-shrink-0" />
+        </Link>
 
         {/* Scoreboard table */}
         <div className="card overflow-hidden">
