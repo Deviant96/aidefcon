@@ -9,6 +9,14 @@
   body {
     @apply font-sans antialiased text-gray-900 bg-white;
   }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-tight;
+  }
 }
 
 @layer components {
@@ -31,7 +39,10 @@
     @apply w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200;
   }
   .section-title {
-    @apply text-2xl font-bold text-gray-900;
+    @apply text-2xl font-display font-bold text-gray-900 tracking-tight;
+  }
+  .display-title {
+    @apply font-display tracking-tight;
   }
 }
 
