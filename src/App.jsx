@@ -10,6 +10,7 @@ import ScoreboardPage from './pages/ScoreboardPage'
 import ChallengesPage from './pages/ChallengesPage'
 import RulesPage from './pages/RulesPage'
 import ProfilePage from './pages/ProfilePage'
+import MyTeamsPage from './pages/MyTeamsPage'
 
 export default function App() {
   const [user, setUser] = useState(null) // null = guest
@@ -98,6 +99,7 @@ export default function App() {
               />
             }
           />
+          <Route path="/my-teams" element={<MyTeamsPage />} />
           <Route path="/rules" element={<RulesPage />} />
           <Route
             path="/profile"
