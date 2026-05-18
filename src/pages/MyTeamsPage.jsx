@@ -182,21 +182,21 @@ export default function MyTeamsPage() {
           </div>
         </div>
 
-        {/* Right wing: Challenges & Scoreboard */}
+        {/* Right wing: Scoreboard & My Teams */}
         <div className="flex items-center justify-center border-l border-gray-100">
-          <div className="flex flex-col items-center gap-8" style={{ writingMode: 'vertical-rl' }}>
-            <Link
-              to="/challenges"
-              className="flex flex-col items-center gap-1 group text-gray-300 hover:text-gray-900 transition-colors"
-            >
-              <span className="text-4xl xl:text-5xl font-extrabold tracking-tight font-display leading-none whitespace-nowrap group-hover:text-gray-900">Challenges</span>
-            </Link>
-            <div className="w-8 h-px bg-gray-200" />
+          <div className="flex flex-row items-center gap-16" style={{writingMode: 'vertical-rl'}}>
             <Link
               to="/scoreboard"
               className="flex flex-col items-center gap-1 group text-gray-300 hover:text-gray-900 transition-colors"
             >
               <span className="text-4xl xl:text-5xl font-extrabold tracking-tight font-display leading-none whitespace-nowrap group-hover:text-gray-900">Scoreboard</span>
+            </Link>
+            <div className="w-8 h-px bg-gray-200" />
+            <Link
+              to="/challenges"
+              className="flex flex-col items-center gap-1 group text-gray-300 hover:text-gray-900 transition-colors"
+            >
+              <span className="text-4xl xl:text-5xl font-extrabold tracking-tight font-display leading-none whitespace-nowrap group-hover:text-gray-900">Challenges</span>
             </Link>
           </div>
         </div>
