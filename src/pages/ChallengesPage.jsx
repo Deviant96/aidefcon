@@ -13,9 +13,10 @@ import {
   mockChallenges,
   mockAnnouncements,
   CATEGORIES,
-  DIFFICULTY_COLORS,
-  CATEGORY_ICONS,
 } from '../data/mockData'
+
+const CHALLENGE_CHIP_NEUTRAL = 'bg-slate-100 text-slate-700'
+const CATEGORY_ICON_COLOR = 'text-sky-600'
 
 function ChallengeDetail({ challenge, isGuest, onAuthClick }) {
   const [flagInput, setFlagInput] = useState('')
@@ -56,12 +57,13 @@ function ChallengeDetail({ challenge, isGuest, onAuthClick }) {
       <div>
         <div className="flex items-center gap-2 mb-2 flex-wrap">
           <span className="badge bg-gray-100 text-gray-700 text-xs">
-            {CATEGORY_ICONS[challenge.category]} {challenge.category}
+            <Flag className={`w-3.5 h-3.5 mr-1 ${CATEGORY_ICON_COLOR}`} />
+            {challenge.category}
           </span>
-          <span className={`badge text-xs ${DIFFICULTY_COLORS[challenge.difficulty]}`}>
+          <span className={`badge text-xs ${CHALLENGE_CHIP_NEUTRAL}`}>
             {challenge.difficulty}
           </span>
-          <span className="badge bg-blue-50 text-blue-700 text-xs font-mono">
+          <span className={`badge text-xs font-mono ${CHALLENGE_CHIP_NEUTRAL}`}>
             {challenge.points} pts
           </span>
           {challenge.solved && (
@@ -240,7 +242,10 @@ export default function ChallengesPage({ isGuest, onAuthClick }) {
                           : 'bg-white text-gray-700 hover:bg-gray-100'
                       }`}
                     >
-                      <span className="leading-none">{cat !== 'All' && `${CATEGORY_ICONS[cat]} `}{cat}</span>
+                      <span className="leading-none inline-flex items-center gap-2">
+                        {cat !== 'All' && <Flag className={`w-4 h-4 ${CATEGORY_ICON_COLOR}`} />}
+                        {cat}
+                      </span>
                       <span className="text-sm font-mono opacity-70">{solved}/{count}</span>
                     </button>
                   )
@@ -265,8 +270,8 @@ export default function ChallengesPage({ isGuest, onAuthClick }) {
                       }`}
                     >
                       <div className="flex items-center gap-3 mb-3 flex-wrap">
-                        <span className={`badge text-sm ${DIFFICULTY_COLORS[challenge.difficulty]}`}>{challenge.difficulty}</span>
-                        <span className="badge bg-blue-50 text-blue-700 text-sm font-mono">{challenge.points} pts</span>
+                        <span className={`badge text-sm ${CHALLENGE_CHIP_NEUTRAL}`}>{challenge.difficulty}</span>
+                        <span className={`badge text-sm font-mono ${CHALLENGE_CHIP_NEUTRAL}`}>{challenge.points} pts</span>
                         {challenge.solved && (
                           <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
                         )}
