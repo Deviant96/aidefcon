@@ -82,10 +82,6 @@ export default function HomePage({ onAuthClick, onFaqClick, onCreateTeam, onJoin
       </div>
 
       <div className="max-w-3xl mx-auto text-center relative z-10">
-        <p className="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full border border-gray-300 bg-white/80 text-[11px] sm:text-xs font-mono text-gray-500 tracking-[0.22em] uppercase">
-          <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.7)] animate-pulse" />
-          Neural Arena Online
-        </p>
         <h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold text-gray-900 tracking-tight leading-none mb-6">
           AI DEFCON
         </h1>
