@@ -132,7 +132,7 @@ export default function QuestDetailPage() {
     <main className="min-h-screen bg-white flex flex-col">
 
       {/* Top bar */}
-      <div className="w-full bg-gray-900 px-6 sm:px-12 lg:px-20 py-4 flex items-center justify-between sticky top-0 z-20">
+      <div className="w-full bg-gray-900 px-6 sm:px-12 lg:px-20 py-4 flex items-center justify-between sticky top-0 z-20 mt-16">
         <Link to="/beginner" className="flex items-center gap-2 text-gray-400 hover:text-white transition font-mono text-sm">
           <ArrowLeft className="w-4 h-4" />
           All Quests
