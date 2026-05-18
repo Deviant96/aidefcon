@@ -413,36 +413,6 @@ export const mockTeams = [
   },
 ]
 
-export const mockAnnouncements = [
-  {
-    id: 1,
-    title: 'Competition has started!',
-    content:
-      'AI Defcon CTF 2025 is now live! All challenges are unlocked. Good luck to all participants. Remember: fair play only!',
-    time: '2h ago',
-    pinned: true,
-    urgent: false,
-  },
-  {
-    id: 2,
-    title: 'Hint released for Heap Exploitation',
-    content:
-      'A small hint has been released for the Heap Exploitation challenge due to low solve rate. Check the challenge detail panel.',
-    time: '45 min ago',
-    pinned: false,
-    urgent: false,
-  },
-  {
-    id: 3,
-    title: 'Server Maintenance Notice',
-    content:
-      'We will perform a 5-minute maintenance window at 18:00 UTC. Submissions will be paused during this period.',
-    time: '20 min ago',
-    pinned: false,
-    urgent: true,
-  },
-]
-
 export const mockFaqs = [
   {
     question: 'How does the competition work?',

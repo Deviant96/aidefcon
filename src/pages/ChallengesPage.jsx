@@ -11,9 +11,9 @@ import {
 } from 'lucide-react'
 import {
   mockChallenges,
-  mockAnnouncements,
   CATEGORIES,
 } from '../data/mockData'
+import useAnnouncements from '../hooks/useAnnouncements'
 
 const CHALLENGE_CHIP_NEUTRAL = 'bg-slate-100 text-slate-700'
 const CATEGORY_ICON_COLOR = 'text-sky-600'
@@ -183,6 +183,7 @@ function ChallengeDetail({ challenge, isGuest, onAuthClick }) {
 export default function ChallengesPage({ isGuest, onAuthClick }) {
   const [activeCategory, setActiveCategory] = useState('All')
   const [selectedChallenge, setSelectedChallenge] = useState(null)
+  const { announcements, loading: announcementsLoading, error: announcementsError } = useAnnouncements()
 
   const categories = ['All', ...CATEGORIES]
 
@@ -286,7 +287,7 @@ export default function ChallengesPage({ isGuest, onAuthClick }) {
               <div className="flex-shrink-0">
                 <h3 className="text-lg font-bold text-gray-700 mb-3">Announcements</h3>
                 <div className="space-y-3 overflow-y-scroll pr-1">
-                  {mockAnnouncements.map((ann) => (
+                  {announcements.map((ann) => (
                     <div
                       key={ann.id}
                       className={`p-4 rounded-xl border shadow ${
@@ -312,6 +313,12 @@ export default function ChallengesPage({ isGuest, onAuthClick }) {
                       </div>
                     </div>
                   ))}
+                  {!announcementsLoading && !announcementsError && announcements.length === 0 && (
+                    <p className="text-sm text-gray-500">No announcements published yet.</p>
+                  )}
+                  {announcementsError && (
+                    <p className="text-sm text-red-600">Announcements are currently unavailable.</p>
+                  )}
                 </div>
               </div>
             </div>

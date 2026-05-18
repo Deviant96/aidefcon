@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Menu, X, Shield, User, Bell, Megaphone, Sparkles } from 'lucide-react'
-import { mockAnnouncements } from '../data/mockData'
+import useAnnouncements from '../hooks/useAnnouncements'
 
 export default function Navbar({ onAuthClick, onFaqClick, isGuest, username }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [announcementsOpen, setAnnouncementsOpen] = useState(false)
+  const { announcements, loading, error } = useAnnouncements()
 
   const announcementsModal = announcementsOpen ? (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -33,7 +34,7 @@ export default function Navbar({ onAuthClick, onFaqClick, isGuest, username }) {
         </div>
 
         <div className="space-y-4">
-          {mockAnnouncements.map((ann) => (
+          {announcements.map((ann) => (
             <div
               key={ann.id}
               className={`card p-5 ${ann.urgent ? 'border-red-200 bg-red-50/50' : ''}`}
@@ -55,6 +56,12 @@ export default function Navbar({ onAuthClick, onFaqClick, isGuest, username }) {
               </div>
             </div>
           ))}
+          {!loading && !error && announcements.length === 0 && (
+            <p className="text-sm text-gray-500">No announcements published yet.</p>
+          )}
+          {error && (
+            <p className="text-sm text-red-600">Announcements are currently unavailable.</p>
+          )}
         </div>
       </div>
     </div>
@@ -82,7 +89,7 @@ export default function Navbar({ onAuthClick, onFaqClick, isGuest, username }) {
               <span className="block text-xs uppercase tracking-wider text-orange-700 font-semibold">Live Feed</span>
               <span className="block text-sm font-bold text-gray-900">Announcements</span>
             </span>
-            <span className="badge bg-orange-100 text-orange-700">{mockAnnouncements.length} New</span>
+            <span className="badge bg-orange-100 text-orange-700">{loading ? '...' : `${announcements.length} New`}</span>
           </button>
 
           {/* Auth area */}
@@ -127,7 +134,7 @@ export default function Navbar({ onAuthClick, onFaqClick, isGuest, username }) {
               <Bell className="w-4 h-4 text-orange-700" />
               Announcements
             </span>
-            <span className="badge bg-orange-100 text-orange-700">{mockAnnouncements.length} New</span>
+            <span className="badge bg-orange-100 text-orange-700">{loading ? '...' : `${announcements.length} New`}</span>
           </button>
           <div className="pt-2 border-t border-gray-100">
             {isGuest ? (

@@ -47,6 +47,7 @@ final class Aidefcon_Core_Plugin
     {
         add_action('rest_api_init', [$this, 'register_routes']);
         add_action('init', [$this, 'register_post_types']);
+        add_action('init', [$this, 'register_post_meta_fields']);
         add_action('admin_init', [$this, 'register_admin_settings']);
         add_action('admin_menu', [$this, 'register_admin_pages']);
         add_action('add_meta_boxes', [$this, 'register_meta_boxes']);
@@ -238,6 +239,102 @@ final class Aidefcon_Core_Plugin
         echo '<p><label><input type="checkbox" name="aidf_urgent" value="1" ' . checked(1, $urgent, false) . '> Mark urgent</label></p>';
         echo '<p><label>Schedule At<br><input type="datetime-local" name="aidf_scheduled_at" value="' . esc_attr($scheduled_at) . '" class="widefat"></label></p>';
         echo '<p class="description">WordPress post scheduling remains available via Publish settings.</p>';
+    }
+
+    public function register_post_meta_fields(): void
+    {
+        register_post_meta('aidf_announcement', 'aidf_pinned', [
+            'type' => 'boolean',
+            'single' => true,
+            'show_in_rest' => true,
+            'default' => false,
+            'sanitize_callback' => [$this, 'sanitize_boolean_meta'],
+            'auth_callback' => '__return_true',
+        ]);
+
+        register_post_meta('aidf_announcement', 'aidf_urgent', [
+            'type' => 'boolean',
+            'single' => true,
+            'show_in_rest' => true,
+            'default' => false,
+            'sanitize_callback' => [$this, 'sanitize_boolean_meta'],
+            'auth_callback' => '__return_true',
+        ]);
+
+        register_post_meta('aidf_announcement', 'aidf_scheduled_at', [
+            'type' => 'string',
+            'single' => true,
+            'show_in_rest' => true,
+            'default' => '',
+            'sanitize_callback' => 'sanitize_text_field',
+            'auth_callback' => '__return_true',
+        ]);
+    }
+
+    public function sanitize_boolean_meta($value): bool
+    {
+        return !empty($value);
+    }
+
+    public function get_announcements(): WP_REST_Response
+    {
+        $query = new WP_Query([
+            'post_type' => 'aidf_announcement',
+            'post_status' => 'publish',
+            'posts_per_page' => 50,
+            'orderby' => 'date',
+            'order' => 'DESC',
+            'no_found_rows' => true,
+        ]);
+
+        $items = array_map([$this, 'format_announcement_item'], $query->posts);
+
+        usort($items, static function (array $left, array $right): int {
+            if ($left['pinned'] !== $right['pinned']) {
+                return $right['pinned'] <=> $left['pinned'];
+            }
+
+            return strcmp((string) $right['published_at'], (string) $left['published_at']);
+        });
+
+        return new WP_REST_Response([
+            'success' => true,
+            'items' => $items,
+        ], 200);
+    }
+
+    private function format_announcement_item(WP_Post $post): array
+    {
+        $content = trim(wp_strip_all_tags((string) $post->post_content));
+        $excerpt = trim(wp_strip_all_tags((string) get_the_excerpt($post)));
+        $published_at = get_the_date(DATE_ATOM, $post);
+        $timestamp = (int) get_post_time('U', true, $post);
+
+        return [
+            'id' => (int) $post->ID,
+            'title' => get_the_title($post),
+            'content' => $excerpt !== '' ? $excerpt : $content,
+            'published_at' => $published_at,
+            'time' => $this->format_relative_time($timestamp),
+            'pinned' => (bool) get_post_meta($post->ID, 'aidf_pinned', true),
+            'urgent' => (bool) get_post_meta($post->ID, 'aidf_urgent', true),
+            'scheduled_at' => (string) get_post_meta($post->ID, 'aidf_scheduled_at', true),
+        ];
+    }
+
+    private function format_relative_time(int $timestamp): string
+    {
+        if ($timestamp <= 0) {
+            return 'Just now';
+        }
+
+        $diff = current_time('timestamp') - $timestamp;
+
+        if ($diff < 60) {
+            return 'Just now';
+        }
+
+        return human_time_diff($timestamp, current_time('timestamp')) . ' ago';
     }
 
     public function enqueue_admin_assets(string $hook): void
@@ -619,6 +716,12 @@ final class Aidefcon_Core_Plugin
             'methods' => WP_REST_Server::CREATABLE,
             'callback' => [$this, 'submit_flag'],
             'permission_callback' => [$this, 'require_login'],
+        ]);
+
+        register_rest_route(AIDEFCON_CORE_REST_NAMESPACE, '/announcements', [
+            'methods' => WP_REST_Server::READABLE,
+            'callback' => [$this, 'get_announcements'],
+            'permission_callback' => '__return_true',
         ]);
 
         register_rest_route(AIDEFCON_CORE_REST_NAMESPACE, '/scoreboard', [
