@@ -65,3 +65,173 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-400;
 }
+
+.home-tech-art {
+  isolation: isolate;
+}
+
+.tech-scanlines {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  background-image: linear-gradient(to bottom, transparent 0%, rgba(17, 24, 39, 0.08) 50%, transparent 100%);
+  background-size: 100% 6px;
+  mix-blend-mode: multiply;
+  animation: tech-pan 18s linear infinite;
+}
+
+.tech-radial-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(78vw, 920px);
+  height: min(78vw, 920px);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.2) 0%, rgba(56, 189, 248, 0.08) 35%, rgba(255, 255, 255, 0) 72%);
+  filter: blur(8px);
+  animation: tech-breathe 6.5s ease-in-out infinite;
+}
+
+.tech-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  border-radius: 9999px;
+}
+
+.tech-orbit-1 {
+  width: min(66vw, 760px);
+  height: min(66vw, 760px);
+  animation: tech-rotate 22s linear infinite;
+}
+
+.tech-orbit-2 {
+  width: min(52vw, 620px);
+  height: min(52vw, 620px);
+  border-style: dashed;
+  animation: tech-rotate-reverse 18s linear infinite;
+}
+
+.tech-node {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: #14b8a6;
+  box-shadow: 0 0 0 5px rgba(20, 184, 166, 0.15), 0 0 18px rgba(20, 184, 166, 0.6);
+}
+
+.tech-node-1 {
+  top: 20%;
+  left: 24%;
+  animation: tech-float 5s ease-in-out infinite;
+}
+
+.tech-node-2 {
+  top: 66%;
+  left: 75%;
+  background: #3b82f6;
+  box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.15), 0 0 18px rgba(59, 130, 246, 0.6);
+  animation: tech-float 6.8s ease-in-out infinite;
+}
+
+.tech-node-3 {
+  top: 32%;
+  left: 84%;
+  width: 8px;
+  height: 8px;
+  background: #0ea5e9;
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.16), 0 0 14px rgba(14, 165, 233, 0.55);
+  animation: tech-float 4.2s ease-in-out infinite;
+}
+
+.tech-circuit-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.38;
+}
+
+.tech-circuit-lines path {
+  fill: none;
+  stroke: #334155;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 8 10;
+  animation: tech-dash 16s linear infinite;
+}
+
+@keyframes tech-rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes tech-rotate-reverse {
+  from {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}
+
+@keyframes tech-breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: translate(-50%, -50%) scale(0.98);
+  }
+  50% {
+    opacity: 0.62;
+    transform: translate(-50%, -50%) scale(1.03);
+  }
+}
+
+@keyframes tech-pan {
+  from {
+    transform: translateY(-6px);
+  }
+  to {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes tech-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes tech-dash {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -150;
+  }
+}
+
+@media (max-width: 640px) {
+  .tech-circuit-lines {
+    opacity: 0.24;
+  }
+
+  .tech-scanlines {
+    opacity: 0.22;
+  }
+
+  .tech-node-3 {
+    display: none;
+  }
+}

@@ -4,11 +4,33 @@ import Countdown from '../components/Countdown'
 
 export default function HomePage({ onAuthClick, onFaqClick, onCreateTeam, onJoinTeam, isGuest, username }) {
   return (
-    <main className="min-h-screen bg-white relative overflow-hidden flex flex-col items-center justify-center px-4">
-      <div className="pointer-events-none absolute inset-0">
+    <main className="home-tech-art min-h-screen bg-white relative overflow-hidden flex flex-col items-center justify-center px-4">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="absolute -top-40 -left-40 w-[30rem] h-[30rem] rounded-full bg-gray-100/70 blur-3xl" />
         <div className="absolute top-24 right-12 w-72 h-72 rounded-full bg-slate-100/80 blur-3xl" />
         <div className="absolute inset-0 opacity-[0.35] [background-image:linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] [background-size:48px_48px]" />
+
+        <div className="tech-scanlines" />
+        <div className="tech-radial-glow" />
+
+        <div className="tech-orbit tech-orbit-1" />
+        <div className="tech-orbit tech-orbit-2" />
+
+        <div className="tech-node tech-node-1" />
+        <div className="tech-node tech-node-2" />
+        <div className="tech-node tech-node-3" />
+
+        <svg
+          className="tech-circuit-lines"
+          viewBox="0 0 1200 800"
+          preserveAspectRatio="none"
+          role="presentation"
+        >
+          <path d="M80 120 H420 V260 H740" />
+          <path d="M1120 200 H880 V460 H560" />
+          <path d="M200 700 H460 V560 H660" />
+          <path d="M1080 640 H880 V520 H780" />
+        </svg>
       </div>
 
       <div className="fixed top-6 right-6 z-40 hidden sm:flex flex-col items-end gap-3">
@@ -59,7 +81,11 @@ export default function HomePage({ onAuthClick, onFaqClick, onCreateTeam, onJoin
         )}
       </div>
 
-      <div className="max-w-3xl mx-auto text-center">
+      <div className="max-w-3xl mx-auto text-center relative z-10">
+        <p className="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full border border-gray-300 bg-white/80 text-[11px] sm:text-xs font-mono text-gray-500 tracking-[0.22em] uppercase">
+          <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.7)] animate-pulse" />
+          Neural Arena Online
+        </p>
         <h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold text-gray-900 tracking-tight leading-none mb-6">
           AI DEFCON
         </h1>
