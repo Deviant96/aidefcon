@@ -11,6 +11,8 @@ import ChallengesPage from './pages/ChallengesPage'
 import RulesPage from './pages/RulesPage'
 import ProfilePage from './pages/ProfilePage'
 import MyTeamsPage from './pages/MyTeamsPage'
+import BeginnerQuestPage from './pages/BeginnerQuestPage'
+import QuestDetailPage from './pages/QuestDetailPage'
 
 export default function App() {
   const [user, setUser] = useState(null) // null = guest
@@ -100,6 +102,8 @@ export default function App() {
             }
           />
           <Route path="/my-teams" element={<MyTeamsPage />} />
+          <Route path="/beginner" element={<BeginnerQuestPage />} />
+          <Route path="/beginner/:slug" element={<QuestDetailPage />} />
           <Route path="/rules" element={<RulesPage />} />
           <Route
             path="/profile"
